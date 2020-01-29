@@ -14,11 +14,11 @@ interface NearConnect {
     val isReceiving: Boolean
 
     class Builder {
-        private lateinit var mContext: Context
-        private lateinit var mListener: Listener
-        private lateinit var mListenerLooper: Looper
-        private lateinit var mPeers: Set<Host>
-        private var mPort: Int = TcpServerService.SERVER_PORT
+        lateinit var mContext: Context
+        lateinit var mListener: Listener
+        lateinit var mListenerLooper: Looper
+        lateinit var mPeers: Set<Host>
+        var mPort: Int = TcpServerService.SERVER_PORT
 
         fun setContext(context: Context): Builder {
             mContext = context

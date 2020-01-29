@@ -15,14 +15,14 @@ interface NearDiscovery {
     val isDiscovering: Boolean
 
     class Builder {
-        private var mDiscoverableTimeout: Long = 60000
-        private var mDiscoveryTimeout: Long = 60000
-        private var mDiscoverablePingInterval: Long = 5000
-        private lateinit var mListener: Listener
-        private lateinit var mLooper: Looper
-        private lateinit var mContext: Context
-        private var mPort: Int = UdpServerService.DISCOVERY_PORT
-        private var mRegex: Regex = Regex("^$")
+        var mDiscoverableTimeout: Long = 60000
+        var mDiscoveryTimeout: Long = 60000
+        var mDiscoverablePingInterval: Long = 5000
+        lateinit var mListener: Listener
+        lateinit var mLooper: Looper
+        lateinit var mContext: Context
+        var mPort: Int = UdpServerService.DISCOVERY_PORT
+        var mRegex: Regex = Regex("^$")
 
         fun setDiscoverableTimeoutMillis(discoverableTimeout: Long): Builder {
             mDiscoverableTimeout = discoverableTimeout
