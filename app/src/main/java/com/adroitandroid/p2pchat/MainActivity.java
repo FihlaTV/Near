@@ -21,6 +21,7 @@ import com.adroitandroid.p2pchat.databinding.ActivityMainBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     stopDiscovery();
                 } else {
                     if (binding.handleEt.getText().length() > 0) {
-                        mNearDiscovery.makeDiscoverable(binding.handleEt.getText().toString());
+                        mNearDiscovery.makeDiscoverable(binding.handleEt.getText().toString(),"");
                         startDiscovery();
                         if (!mNearConnect.isReceiving()) {
                             mNearConnect.startReceiving();
@@ -91,9 +92,14 @@ public class MainActivity extends AppCompatActivity {
     private NearDiscovery.Listener getNearDiscoveryListener() {
         return new NearDiscovery.Listener() {
             @Override
-            public void onPeersUpdate(Set<Host> hosts) {
-                mParticipantsAdapter.setData(hosts);
+            public void onPeersUpdate(@NotNull Set<? extends Host> host) {
+                mParticipantsAdapter.setData((Set<Host>) host);
             }
+
+           /* @Override
+            public void onPeersUpdate(@NonNull Set<Host> hosts) {
+                mParticipantsAdapter.setData(hosts);
+            }*/
 
             @Override
             public void onDiscoveryTimeout() {
@@ -212,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         mNearConnect.startReceiving();
     }
 }
